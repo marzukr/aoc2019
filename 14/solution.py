@@ -64,8 +64,16 @@ def ore(n, reactions):
         reactions["FUEL"] = (reactions["FUEL"][0], new_reaction)
     return reactions["FUEL"][1]["ORE"]
 
-while True:
-    i = int(input())
+new_reactions()
+current = ore(1, reactions_o)
+i = 1000000000000 // current
+power = len(str(i)) - 1
+i = 10 ** power
+while power >= 0:
     new_reactions()
+    i += 10 ** power
     current = ore(i, reactions_o)
-    print(current)
+    if current > 1000000000000:
+        i -= 10 ** power
+        power -= 1
+print(i)
